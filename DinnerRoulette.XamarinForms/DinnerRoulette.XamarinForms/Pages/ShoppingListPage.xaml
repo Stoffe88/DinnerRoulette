@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:DinnerRoulette.XamarinForms.Models"
+    xmlns:viewmodels="clr-namespace:DinnerRoulette.XamarinForms.ViewModels"
+    x:Class="DinnerRoulette.XamarinForms.Pages.ShoppingListPage"
+    Title="Shopping list">
+
+    <!-- Gives access to the ResourceDictonary in App.xaml -->
+    <ContentPage.Resources>
+        <ResourceDictionary />
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource BackGroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <ImageButton Source="/Resourses/IMG/DinnerRouletteLogo.png" 
+                    Grid.Row="0"
+                    Clicked="Home"/>
+
+            <Label Grid.Row="1"
+                   Margin="10" 
+                   Text="Shopping list"
+                   TextColor="White"
+                   FontSize="Large"
+                   Style="{ StaticResource Font }"/>
+
+            <RefreshView
+                Grid.Row="3"
+                Margin="0,-100,0,0"
+                Command="{Binding UpgradeIngredientsCommand}">
+                <CollectionView 
+                    ItemsSource="{Binding Ingredients}"
+                    SelectionMode="Single"
+                    SelectionChanged="CollectionView_SelectionChanged"
+                    SelectedItem="{Binding UpdateIngredientsCommand}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Ingredient">
+                            <Frame 
+                                   BackgroundColor="{StaticResource BackGroundColor}">
+                                <Grid> 
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="0.3*" />
+                                        <ColumnDefinition Width="0.4*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox 
+                                        Grid.Column="0"
+                                        IsChecked="{Binding Picked}"
+                                        CheckedChanged="OnPickedChanged"/>
+                                    <Label 
+                                        Grid.Column="1"
+                                        Style="{StaticResource Font}"
+                                        Text="{ Binding Amount }"/>
+                                    <Label 
+                                        Grid.Column="2"  
+                                        Style="{StaticResource Font}"
+                                        Text="{Binding Unit}"/>
+                                    <Label 
+                                        Grid.Column="3"  
+                                        Style="{StaticResource Font}"
+                                        Text="{Binding Title}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DinnerRoulette.XamarinForms.Pages.DetailPage"
+             xmlns:models="clr-namespace:DinnerRoulette.XamarinForms.Models"
+             Title="Details">
+
+    <!-- Gives access to the ResourceDictonary in App.xaml -->
+    <ContentPage.Resources>
+        <ResourceDictionary />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid
+            BackgroundColor="{StaticResource BackGroundColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ImageButton 
+                Grid.Row="0"
+                Source="/Resourses/IMG/DinnerRouletteLogo.png" 
+                Clicked="Home"/>
+                <Label 
+                    Grid.Row="1"
+                    Text="{Binding Title}"
+                    HorizontalOptions="Center"
+                    FontSize="40"
+                    Style="{StaticResource Font}"/>
+                <Image
+                    Grid.Row="2"
+                    Source="{ Binding Image }"/>
+                <Label
+                    Grid.Row="3"
+                    Text="{Binding Description}"
+                    TextType="Html"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource Font}"/>
+                <CollectionView
+                    Grid.Row="4"
+                    ItemsSource="{Binding Ingredients}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Ingredient">
+                            <Frame
+                            BackgroundColor="{StaticResource BackGroundColor}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Column="0"
+                                        Style="{StaticResource Font}"
+                                        Text="{ Binding Amount }"/>
+                                    <Label 
+                                        Grid.Column="1"  
+                                        Style="{StaticResource Font}"
+                                        Text="{Binding Unit}"/>
+                                    <Label 
+                                        Grid.Column="2"  
+                                        Style="{StaticResource Font}"
+                                        Text="{Binding Title}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView
+                    Grid.Row="5"
+                    ItemsSource="{Binding Instructions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Instruction">
+                            <Frame
+                            BackgroundColor="{StaticResource BackGroundColor}">
+                                <Label
+                                Text="{Binding Step}"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ScrollView
+                    Grid.Row="6">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Text="Recipe overview"/>
+                        <Label
+                            Grid.Row="1"
+                            Text="{Binding RecipeInformation.ReadyInMinutes, 
+                                    StringFormat='Ready in {0} minutes.'}"/>
+                        <Label
+                            Grid.Row="2"
+                            Text="{Binding RecipeInformation.Diets, 
+                                    StringFormat='Diets: {0}'}"/>
+                        <Label
+                            Grid.Row="3"
+                            Text="{Binding RecipeInformation.WeightWatcherSmartPoints, 
+                                    StringFormat='Weightwatcher Smart Points: {0}'}"/>
+                        <Label 
+                            Grid.Row="4"
+                            Text="{Binding RecipeInformation.GlutenFree, 
+                                    StringFormat='Glutenfree: {0}'}"/>
+                        <Label
+                            Grid.Row="5"
+                            Text="{Binding RecipeInformation.DairyFree, 
+                                    StringFormat='Dairy free: {0}'}"/>
+                        <Label
+                            Grid.Row="6"
+                            Text="{Binding RecipeInformation.Vegan, 
+                                    StringFormat='Vegan: {0}'}"/>
+                        <Label
+                            Grid.Row="7"
+                            Text="{Binding RecipeInformation.Vegetarian, 
+                                    StringFormat='Vegetarian: {0}'}"/>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

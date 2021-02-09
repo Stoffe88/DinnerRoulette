@@ -1,0 +1,16 @@
+﻿button {
+    text-align: center;
+    color: #3b2b11;
+    font-size: 35;
+    font-weight: bolder;
+    background-color: #854913;
+    border-radius: 5;
+}
+imageButton {
+    background-color: transparent;
+}
+label {
+    color: #a15d30;
+    font-size: large;
+}
+
